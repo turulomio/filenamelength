@@ -1,5 +1,4 @@
 from colorama import init, Style
-from datetime import datetime, timedelta
 from argparse import ArgumentParser, RawTextHelpFormatter
 from filenamelength.libmanagers import ObjectManager
 from filenamelength.version import __version__, __versiondate__
@@ -46,126 +45,59 @@ class Filename:
 ## 1. Pretend. Show information in console
 ## 2. Write. Show information in console. Writes log. Delete innecesary files.
 class FilenameManager(ObjectManager):
-    def __init__(self, directory):
+    ## @param directory If None creates an empty manager
+    def __init__(self, directory=None):
         ObjectManager.__init__(self)
         self.__pretending=1# Tag to set if we are using pretending or not. Can take None: Nor remove nor pretend, 0 Remove, 1 Pretend
             
-        for currentpath, folders, files in walk('.'):
-            for file in files:
-                self.append(Filename(path.abspath(currentpath + sep + file)))
+        if directory!=None:
+            for currentpath, folders, files in walk('.'):
+                for file in files:
+                    self.append(Filename(path.abspath(currentpath + sep + file)))
 
-    def print(self):
-        self.order_by_length()
+    def print(self, order_by_length=False):
+        if order_by_length==False:
+            self.order_by_name()
+            suf="ordered by name"
+        else:
+            self.order_by_length()
+            suf="ordered by length"
+        errors=0
+        print (Style.BRIGHT + _("FilenameLength list")+Style.RESET_ALL)
         for  o in self.arr:
-            print("{} {}".format(o.length(), o.filename))
+            try:
+                print("  + {} {}".format(o.length(), o.filename))
+            except:
+                print(Style.BRIGHT+"  + Error with a filename"+Style.RESET_ALL)
+                errors=errors+1
+        print (Style.BRIGHT + _("{} files found {}".format(self.length(), suf))+Style.RESET_ALL)
+                
 
-
-    #This function must be called after set status
-    def __write_log(self, ):
-        s=self.__header_string() + "\n"
+    def FilenameManager_length_minimum(self, minimum):  #This function must be called after set status
+        r=FilenameManager()
         for o in self.arr:
-                 s=s+"{} >>> {}\n".format(o.filename, _("Delete"))
-        f=open("filenamelength.log","a")
-        f.write(s)
-        f.close()
-
-
+            if o.length()>=minimum:
+                r.append(o)
+        return r
 
     def order_by_length(self):       
         self.arr=sorted(self.arr, key=lambda e: e.length(),  reverse=False) 
 
-    #This function must be called after set status
-    def __console_output(self):
-#        print(self.__header_string(color=True))
-#        if self.length()==0:
-#            return
-#
-#        print (self.one_line_status())
-#
-#        n_remain=self.__number_files_with_status(FileStatus.Remain)
-#        n_delete=self.__number_files_with_status(FileStatus.Delete)
-#        n_young=self.__number_files_with_status(FileStatus.TooYoungToDelete)
-#        n_over=self.__number_files_with_status(FileStatus.OverMaxFiles)
-#        if self.__pretending==1:
-#            if self.__all_filenames_are_directories():
-#                print (_("Directories status pretending:"))
-#            elif self.__all_filenames_are_regular_files():
-#                print (_("File status pretending:"))
-#            result=_("So, {} files will be deleted and {} will be kept when you use --remove parameter.").format(Fore.YELLOW + str(n_delete+n_over) + Style.RESET_ALL, Fore.YELLOW + str(n_remain+n_young) +Style.RESET_ALL)
-#        elif self.__pretending==0:
-#            if self.__all_filenames_are_directories():
-#                print (_("Directories status removing:"))
-#            elif self.__all_filenames_are_regular_files():
-#                print (_("File status removing:"))
-#            result=_("So, {} files have been deleted and {} files have been kept.").format(Fore.YELLOW + str(n_delete+n_over) + Style.RESET_ALL, Fore.YELLOW + str(n_remain+n_young) +Style.RESET_ALL)
-#        print ("  * {} [{}]: {}".format(_("Remains"), Fore.GREEN + _("R") + Style.RESET_ALL, n_remain))
-#        print ("  * {} [{}]: {}".format(_("Delete"), Fore.RED + _("D") + Style.RESET_ALL, n_delete))
-#        print ("  * {} [{}]: {}".format(_("Too young to delete"), Fore.MAGENTA + _("Y") + Style.RESET_ALL, n_young))
-#        print ("  * {} [{}]: {}".format(_("Over max files"), Fore.YELLOW + _("O") + Style.RESET_ALL, n_over))
-        print("")
-
-
-    ## Shows information in console
-    def pretend(self):
-        self.__pretending=1
-        self.__set_filename_status()
-        self.__console_output()
-
-    ## Shows information in console
-    ## Write log
-    ## Delete Files
-    def remove(self):
-        self.__pretending=0
-#        self.__set_filename_status()
-#        self.__console_output()
-#        if self.logging==True:
-#            self.__write_log()
-#        for o in self.arr:
-#            if o.status in [FileStatus.OverMaxFiles, FileStatus.Delete]:
-#                if os.path.isfile(o.filename):
-#                    os.remove(o.filename)
-#                elif os.path.isdir(o.filename):
-#                    shutil.rmtree(o.filename)
-
-
-#def makedirs(dir):
-#    try:
-#       os.makedirs(dir)
-#    except:
-#       pass
-
-
-
+    def order_by_name(self):       
+        self.arr=sorted(self.arr, key=lambda e: e.filename,  reverse=False) 
 
 
 ## Creates an example subdirectory and fills it with datetime pattern filenames
 def create_examples():
-    makedirs("filenamelength_examples/files")
-    number=1000
-    for i in range (number):
-        d=datetime.now()-timedelta(days=i)
-        filename="filenamelength_examples/files/{}{:02d}{:02d} {:02d}{:02d} filenamelength example.txt".format(d.year,d.month,d.day,d.hour,d.minute)
-        f=open(filename,"w")
-        f.close()
-
-    makedirs("filenamelength_examples/directories")
-    number=1000
-    for i in range (number):
-        d=datetime.now()-timedelta(days=i)
-        filename="filenamelength_examples/directories/{}{:02d}{:02d} {:02d}{:02d} Directory/filenamelength example.txt".format(d.year,d.month,d.day,d.hour,d.minute)
-        makedirs(path.dirname(filename))        
-        f=open(filename,"w")
-        f.close()
-
-    makedirs("filenamelength_examples/files_with_different_roots")
-    number=5
-    for i in range (number):
-        d=datetime.now()-timedelta(days=i)
-        filename="filenamelength_examples/files_with_different_roots/{}{:02d}{:02d} {:02d}{:02d} filenamelength example {}.txt".format(d.year,d.month,d.day,d.hour,d.minute, i)
-        f=open(filename,"w")
-        f.close()
-
-
+    makedirs("filenamelength_examples", exist_ok=True)
+    s="1234567890"
+    try:
+        for i in range (1, 100):
+            filename=s*i
+            f=open("filenamelength_examples"+ sep + filename,"w")
+            f.close()
+    except:
+        print( "Error with filename length: ,", len(filename))
     print (Style.BRIGHT + _("Different examples have been created in the directory 'filenamelength_examples'"))
 
 def remove_examples():
@@ -181,15 +113,18 @@ def remove_examples():
 ## You can call with main(['--pretend']). It's equivalento to os.system('filenamelength --pretend')
 ## @param arguments is an array with parser arguments. For example: ['--max_files_to_store','9']. 
 def main(arguments=None):
-    parser=ArgumentParser(prog='filenamelength', description=_('Admin options to work with the max length of the name of your files'), epilog=_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=RawTextHelpFormatter)
+    parser=ArgumentParser(prog='filenamelength', description=_('Admin options to work with the max length of the name of your files'), epilog=_("Minimum length for windows is 247")+"\n\n"+_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
 
     group= parser.add_mutually_exclusive_group(required=False)
     group.add_argument('--create_examples', help=_("Create example directories"), action="store_true",default=False)
     group.add_argument('--remove_examples', help=_("Remove example directories'"), action="store_true",default=False)
-    group.add_argument('--to_windows', help=_("Removes files permanently"), action="store_true", default=False)
-    group.add_argument('--pretend', help=_("Makes a simulation and doesn't remove files"), action="store_true", default=False)
+#    group.add_argument('--to_windows', help=_("Removes files permanently"), action="store_true", default=False)
+#    group.add_argument('--pretend', help=_("Makes a simulation and doesn't remove files"), action="store_true", default=False)
+    group.add_argument('--minimum', help=_("List files with a minimum length"), action="store")
 
+
+    parser.add_argument('--order_by_length', action='store_true', default=False)
     args=parser.parse_args(arguments)
 
     init(autoreset=True)
@@ -202,9 +137,29 @@ def main(arguments=None):
         exit(ExitCodes.Success)
 
     manager=FilenameManager(getcwd())
+        
+    if args.minimum:
+        ##Seriously, generally speaking it is 252 characters, but that comes with caveats. In real-world, common usage, the max is 247. Here is why:
+        ##1. The maximum Windows filename length to the operating system is 260 characters, however that includes a number of required characters that lower the effective number.
+        ##2. From the 260, you must allow room for the following:
+        ##    Drive letter
+        ##    Colon after drive letter
+        ##    Backslash after drive letter
+        ##    End-of-Line character
+        ##    Backslashes that are part of the filename path (e.g. c:\dir-name\dir-name\filename)
+        ##So, that takes the 260 down to 256 characters as an absolute maximum. That would be the case only if you had a very long filename with no extension and it was located on the root folder of the disk.
+        ##3. Looking at more common and realistic scenarios, your effective maximum is going to be significantly lower. Add an extension (very common), and your maximum length drops to 252 or 251 characters, depending on the length of the extension (most are 3 characters; some are 4 - e.g. docx or mpeg).
+        ##4. Each directory name in the path of the filename must be included in that 260 characters. This is why errors sometimes occur when moving files between directories. Users are often confused by the "filename too long" message when they see a short filename. The reason for the error is the total path length must conform to the filename maximum length. Windows makes no distinction in filename storage between the path and filenames. They are stored in the same space. Linux OTOH, does make a distinction. On a Linux O.S., your path name is maxxed out at 4,096 characters while the filename is limited to 256.
+        ##Breaking down all of the above:
+        ##Absolute (relative) maximum file length - including path - is 256 characters.
+        ##That is how you should be thinking of filename length in Windows - as path length and not file name length. Since there is no way to know how long the path of the directory your file is in, I can't give you a firm answer. Do your files all have extensions? I don't know that either.
+        ##If you will not know ahead of time if the file has an extension name or not, presume it will use up 5 characters for an extension and that will lower your path max to 251. If the files won't be stored in the root disk folder, make sure you allow room for the directory path names and backslash characters that separate each directory name. That will take you down to 248 (and probably lower).
+        ##This process is one of many reasons why Windows architecture is antiquated - even in Windows 10
+        args.minimum=int(args.minimum)
+        incompatible=manager.FilenameManager_length_minimum(args.minimum)
+        incompatible.print(args.order_by_length)
+        print("Files with a minimum length of {}".format(args.minimum))
+        exit(ExitCodes.Success)
 
-    if args.pretend==True:
-        manager.pretend()
-
-    manager.print()
+    manager.print(args.order_by_length)
     # List files
