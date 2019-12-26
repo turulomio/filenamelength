@@ -1,0 +1,74 @@
+.TH FILENAMELENGTH 1 2019\-12\-26
+.SH NAME
+
+.B filenamelength:
+Remove innecesary files or directories with a date and time pattern in the current directory.
+.SH SYNOPSIS
+
+filenamelength [\-h] [\-\-version] (\-\-create_example | \-\-remove | \-\-pretend)
+                        [\-\-pattern PATTERN] [\-\-disable_log]
+                        [\-\-remove_mode {RemainFirstInMonth,RemainLastInMonth}]
+                        [\-\-too_young_to_delete TOO_YOUNG_TO_DELETE]
+                        [\-\-max_files_to_store MAX_FILES_TO_STORE]
+.SH DESCRIPTION
+
+.PP
+This app has the following mandatory parameters:
+.PP
+.RS
+.B \-\-create_example
+.RE
+.PP
+.RS
+.RS
+Create two directories called 'example' and 'example_directories' in the current working directory and fill it with example files with date and time patterns.
+.RE
+.RE
+.PP
+.RS
+.B \-\-pretend
+.RE
+.PP
+.RS
+.RS
+Makes a simulation selecting which files will be deleted when \-\-remove parameter is used.
+.RE
+.RE
+.PP
+.RS
+.B \-\-remove
+.RE
+.PP
+.RS
+.RS
+Deletes files. Be careful, This can't be unmade. Use \-\-pretend before.
+.RE
+.RE
+.PP
+With \-\-pretend and \-\-remove you can use this parameters:
+.PP
+.RS
+.B \-\-pattern
+.RE
+.PP
+.RS
+.RS
+Sets the date and time pattern to search in the current directory filenames. It uses python strftime function format.
+.RE
+.RE
+.PP
+.RS
+.B \-\-disable_log
+.RE
+.PP
+.RS
+.B \-\-remove_mode
+.RE
+.PP
+.RS
+.B \-\-too_young_to_delete
+.RE
+.PP
+.RS
+.B \-\-max_files_to_store
+.RE

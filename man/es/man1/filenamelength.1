@@ -1,0 +1,74 @@
+.TH FILENAMELENGTH 1 2019\-12\-26
+.SH NAME
+
+.B filenamelength:
+Borra ficheros o directorios innecesarios, que tengan un patr\('on de fecha y hora en el directorio actual.
+.SH SYNOPSIS
+
+filenamelength [\-h] [\-\-version] (\-\-create_example | \-\-remove | \-\-pretend)
+                        [\-\-pattern PATTERN] [\-\-disable_log]
+                        [\-\-remove_mode {RemainFirstInMonth,RemainLastInMonth}]
+                        [\-\-too_young_to_delete TOO_YOUNG_TO_DELETE]
+                        [\-\-max_files_to_store MAX_FILES_TO_STORE]
+.SH DESCRIPCI\('ON
+
+.PP
+Esta aplicaci\('on tiene los siguientes par\('ametros obligatorios
+.PP
+.RS
+.B \-\-create_example
+.RE
+.PP
+.RS
+.RS
+Crea dos directorios de nombre 'example' y 'example_directories' en el directorio actual y los llena con ficheros de ejemplo que tengan patr\('ones de fecha y hora.
+.RE
+.RE
+.PP
+.RS
+.B \-\-pretend
+.RE
+.PP
+.RS
+.RS
+Realiza una simulaci\('on seleccionando que ficheros ser\('an borrados cuando se use el par\('ametro \-\-remove.
+.RE
+.RE
+.PP
+.RS
+.B \-\-remove
+.RE
+.PP
+.RS
+.RS
+Borra los ficheros. Ten cuidado, esto no puede deshacerse. Usa antes \-\-pretend.
+.RE
+.RE
+.PP
+Con \-\-pretend y \-\-remove puedes usar estos par\('ametros
+.PP
+.RS
+.B \-\-pattern
+.RE
+.PP
+.RS
+.RS
+Establece el patr\('on de fecha y hora para buscar en los nombres del directorio actual. Usa el formato de python de la funci\('onde strftime
+.RE
+.RE
+.PP
+.RS
+.B \-\-disable_log
+.RE
+.PP
+.RS
+.B \-\-remove_mode
+.RE
+.PP
+.RS
+.B \-\-too_young_to_delete
+.RE
+.PP
+.RS
+.B \-\-max_files_to_store
+.RE

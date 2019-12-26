@@ -1,0 +1,7 @@
+include LICENSE.txt *.py
+recursive-include locale *.po 
+recursive-include toomanyfiles *.mo
+recursive-include locale *.1
+recursive-include doc/ttyrec *.gif
+prune __pycache__
+global-exclude *.pyc
