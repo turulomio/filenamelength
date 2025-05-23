@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TooManyFiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 08:08+0200\n"
+"POT-Creation-Date: 2025-05-23 08:44+0200\n"
 "PO-Revision-Date: 2015-03-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Directory error"
-msgstr ""
+msgstr "Error de directory"
 
 msgid "ordered by path"
-msgstr ""
+msgstr "ordenado por path"
 
 msgid "ordered by path length"
-msgstr ""
+msgstr "ordenado por la longitud del path"
 
 msgid "ordered by filename length"
-msgstr ""
+msgstr "ordenado por la longitud del nombre del fichero"
 
-msgid "{} files found {}"
-msgstr "{} ficheros encontrados {}"
+msgid "{} files found {}, whose path length is greater than or equal to {} and its filename length is greater than or equal to {}"
+msgstr "{} ficheros encontrados {}, cuya longitud de path es mayor o igual que {} y su longitud de nombre de fichero es mayor o igual que {}"
 
 msgid "Lists files with path and filename conditions"
 msgstr ""
@@ -42,22 +42,19 @@ msgstr "La mínima longitud para windows es 247"
 msgid "Developed by Mariano Muñoz 2019-{}"
 msgstr "Desarrollado por Mariano Muñoz 2019-{}"
 
-msgid "List files whose path length is greater or equal than this value"
+msgid "List files whose path length is greater than or equal to this value"
 msgstr ""
 
-msgid "List files whose filename length is greater or equal than this value"
+msgid "List files whose filename length is greater than or equal to this value"
 msgstr ""
 
 msgid "Different ways to order output"
-msgstr ""
+msgstr "Diferentes formas de ordenar la salida"
 
 msgid "New Release:"
 msgstr "Nueva versión:"
 
-msgid "  * Change version and date in version.py"
-msgstr ""
-
-msgid "  * Edit Changelog in README"
+msgid "  * Change version and date in __init__.py"
 msgstr ""
 
 msgid "  * Make a new tag in github"
@@ -68,30 +65,3 @@ msgstr ""
 
 msgid "  * Upload to portage repository"
 msgstr ""
-
-msgid "DESCRIPTION"
-msgstr "DESCRIPCIÓN"
-
-msgid "Admin options to work with the max length of the name of your files"
-msgstr ""
-
-msgid "This app has the following mandatory parameters:"
-msgstr "Esta aplicación tiene los siguientes parámetros obligatorios"
-
-msgid "With --pretend and --remove you can use this parameters:"
-msgstr "Con --pretend y --remove puedes usar estos parámetros"
-
-#~ msgid "Uninstall command only works in Linux"
-#~ msgstr "El comando 'uninstall' solo funciona en Linux"
-
-#~ msgid "FilenameLength list"
-#~ msgstr "Listado de FilenameLength"
-
-#~ msgid "Create example directories"
-#~ msgstr "Crear directorios de ejemplo"
-
-#~ msgid "Remove example directories'"
-#~ msgstr "Borrar directorios de ejemplo"
-
-#~ msgid "List files with a minimum length"
-#~ msgstr "Lista ficheros con una longitud mínima"
