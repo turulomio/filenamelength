@@ -751,17 +751,6 @@ test = ["pyfakefs", "pytest (>=6,!=8.1.*)"]
 type = ["pygobject-stubs", "pytest-mypy", "shtab", "types-pywin32"]
 
 [[package]]
-name = "mangenerator"
-version = "0.4.0"
-description = "Python module to generate man documentation"
-optional = false
-python-versions = "*"
-groups = ["dev"]
-files = [
-    {file = "mangenerator-0.4.0.tar.gz", hash = "sha256:7a3413d1b3a4cd3e8d04de6145ac0d9011b54023a9a49a9ed2e5f55cdbd51dc9"},
-]
-
-[[package]]
 name = "more-itertools"
 version = "10.7.0"
 description = "More routines for operating on iterables, beyond itertools"
@@ -1693,4 +1682,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4"
-content-hash = "1311b124200d4ea3f4f584c7b088457449d413f2a2662dfe1623ab206333f435"
+content-hash = "6c7bceeedef3d11cef30745a9e1ab373e8936c817778ca761ae1ab1b5782a361"
