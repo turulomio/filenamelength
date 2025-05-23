@@ -1,0 +1,31 @@
+[project]
+name = "filenamelength"
+version = "0.1.0"
+description = "Admin options to work with the max length of the name of your files"
+authors = [
+    {name = "turulomio",email = "turulomio@yahoo.es"}
+]
+license = {text = "GPL-3"}
+readme = "README.md"
+requires-python = ">=3.9,<4"
+dependencies = [
+    "colorama >=0.4.6",
+    "pydicts >=1.0.0"
+]
+
+[tool.poetry]
+
+[tool.poetry.scripts]
+filenamelength='filenamelength.filenamelength:main'
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = ">=0.34.0"
+poetry = ">=2.1.3"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+release = { script = "filenamelength.poethepoet:release" }
+translate = { script = "filenamelength.poethepoet:translate" }

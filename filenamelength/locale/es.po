@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TooManyFiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-26 08:40+0100\n"
+"POT-Creation-Date: 2025-05-23 08:08+0200\n"
 "PO-Revision-Date: 2015-03-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -17,6 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Directory error"
+msgstr ""
+
+msgid "ordered by path"
+msgstr ""
+
+msgid "ordered by path length"
+msgstr ""
+
+msgid "ordered by filename length"
+msgstr ""
+
+msgid "{} files found {}"
+msgstr "{} ficheros encontrados {}"
+
+msgid "Lists files with path and filename conditions"
+msgstr ""
+
+msgid "Minimum length for windows is 247"
+msgstr "La mínima longitud para windows es 247"
+
+msgid "Developed by Mariano Muñoz 2019-{}"
+msgstr "Desarrollado por Mariano Muñoz 2019-{}"
+
+msgid "List files whose path length is greater or equal than this value"
+msgstr ""
+
+msgid "List files whose filename length is greater or equal than this value"
+msgstr ""
+
+msgid "Different ways to order output"
+msgstr ""
 
 msgid "New Release:"
 msgstr "Nueva versión:"
@@ -27,9 +60,6 @@ msgstr ""
 msgid "  * Edit Changelog in README"
 msgstr ""
 
-msgid "If changed restart from first python setup.py doc"
-msgstr ""
-
 msgid "  * Make a new tag in github"
 msgstr ""
 
@@ -38,9 +68,6 @@ msgstr ""
 
 msgid "  * Upload to portage repository"
 msgstr ""
-
-msgid "Uninstall command only works in Linux"
-msgstr "El comando 'uninstall' solo funciona en Linux"
 
 msgid "DESCRIPTION"
 msgstr "DESCRIPCIÓN"
@@ -54,33 +81,17 @@ msgstr "Esta aplicación tiene los siguientes parámetros obligatorios"
 msgid "With --pretend and --remove you can use this parameters:"
 msgstr "Con --pretend y --remove puedes usar estos parámetros"
 
-msgid "FilenameLength list"
-msgstr "Listado de FilenameLength"
+#~ msgid "Uninstall command only works in Linux"
+#~ msgstr "El comando 'uninstall' solo funciona en Linux"
 
-msgid "{} files found {}"
-msgstr "{} ficheros encontrados {}"
+#~ msgid "FilenameLength list"
+#~ msgstr "Listado de FilenameLength"
 
-msgid "Different examples have been created in the directory 'filenamelength_examples'"
-msgstr ""
+#~ msgid "Create example directories"
+#~ msgstr "Crear directorios de ejemplo"
 
-msgid "'filenamelength_examples' directory removed"
-msgstr ""
+#~ msgid "Remove example directories'"
+#~ msgstr "Borrar directorios de ejemplo"
 
-msgid "I can't remove 'filenamelength_examples' directory"
-msgstr ""
-
-msgid "Minimum length for windows is 247"
-msgstr "La mínima longitud para windows es 247"
-
-msgid "Developed by Mariano Muñoz 2019-{}"
-msgstr "Desarrollado por Mariano Muñoz 2019-{}"
-
-msgid "Create example directories"
-msgstr "Crear directorios de ejemplo"
-
-msgid "Remove example directories'"
-msgstr "Borrar directorios de ejemplo"
-
-msgid "List files with a minimum length"
-msgstr "Lista ficheros con una longitud mínima"
-
+#~ msgid "List files with a minimum length"
+#~ msgstr "Lista ficheros con una longitud mínima"

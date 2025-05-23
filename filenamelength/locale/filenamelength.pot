@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-23 08:10+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Directory error"
+msgstr ""
+
+msgid "ordered by path"
+msgstr ""
+
+msgid "ordered by path length"
+msgstr ""
+
+msgid "ordered by filename length"
+msgstr ""
+
+msgid "{} files found {}"
+msgstr ""
+
+msgid "Lists files with path and filename conditions"
+msgstr ""
+
+msgid "Minimum length for windows is 247"
+msgstr ""
+
+msgid "Developed by Mariano Muñoz 2019-{}"
+msgstr ""
+
+msgid "List files whose path length is greater or equal than this value"
+msgstr ""
+
+msgid "List files whose filename length is greater or equal than this value"
+msgstr ""
+
+msgid "Different ways to order output"
+msgstr ""
+
+msgid "New Release:"
+msgstr ""
+
+msgid "  * Change version and date in version.py"
+msgstr ""
+
+msgid "  * Edit Changelog in README"
+msgstr ""
+
+msgid "  * Make a new tag in github"
+msgstr ""
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr ""
+
+msgid "  * Upload to portage repository"
+msgstr ""
+
+msgid "DESCRIPTION"
+msgstr ""
+
+msgid "Admin options to work with the max length of the name of your files"
+msgstr ""
+
+msgid "This app has the following mandatory parameters:"
+msgstr ""
+
+msgid "With --pretend and --remove you can use this parameters:"
+msgstr ""
