@@ -59,7 +59,7 @@ def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, ord
         lod_files=lod.lod_order_by(lod_files,"Filename length")
         suf=_("ordered by filename length")
     lod.lod_print(lod_files)
-    print (Style.BRIGHT + _("{} files found {}".format(len(lod_files), suf))+Style.RESET_ALL)
+    print (Style.BRIGHT + _("{} files found {}, whose path length is greater than or equal to {} and its filename length is greater than or equal to {}".format(len(lod_files), suf, minimum_path_length, minimum_filename_length))+Style.RESET_ALL)
                 
 
 ## filenamelength main script
@@ -69,8 +69,8 @@ def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, ord
 def main(arguments=None):
     parser=ArgumentParser(prog='filenamelength', description=_('Lists files with path and filename conditions'), epilog=_("Minimum length for windows is 247")+"\n\n"+_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
-    parser.add_argument('--minimum_path_length', help=_("List files whose path length is greater or equal than this value"), action="store", default=0, type=int)
-    parser.add_argument('--minimum_filename_length', help=_("List files whose filename length is greater or equal than this value"), action="store", default=0, type=int)
+    parser.add_argument('--minimum_path_length', help=_("List files whose path length is greater than or equal to this value"), action="store", default=0, type=int)
+    parser.add_argument('--minimum_filename_length', help=_("List files whose filename length is greater than or equal to this value"), action="store", default=0, type=int)
     parser.add_argument("--order_by", choices=['Path', 'PathLength', 'FilenameLength'], help=_("Different ways to order output"), default="Path")
     args=parser.parse_args(arguments)
 
