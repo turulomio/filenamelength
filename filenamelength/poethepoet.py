@@ -5,24 +5,20 @@ from os import system
 
 _=gettext
 
-
-
 install('filenamelength', 'filenamelength/locale')
 
 def release():
     print(_("New Release:"))
-    print(_("  * Change version and date in version.py"))
-    print(_("  * Edit Changelog in README"))
-    print("  * python setup.py doc")
-    print("  * mcedit locale/es.po")
-    print("  * python setup.py doc")
-    print("  * python setup.py install")
-    print("  * python setup.py doxygen")
+    print("  * Create and issue and its branch in Github. Copy and paste code.")
+    print(_("  * Change version and date in __init__.py"))
+    print("  * poe translate")
+    print("  * mcedit filenamelength/locale/es.po")
+    print("  * poe translate")
     print("  * git commit -a -m 'filenamelength-{}'".format(__version__))
     print("  * git push")
     print(_("  * Make a new tag in github"))
-    print("  * python setup.py sdist upload -r pypi")
-    print("  * python setup.py uninstall")
+    print("  * poetry build")
+    print("  * poetry publish --username --password")
     print(_("  * Create a new gentoo ebuild with the new version"))
     print(_("  * Upload to portage repository")) 
 
