@@ -1,6 +1,6 @@
 [project]
 name = "filenamelength"
-version = "0.1.0"
+version = "1.0.0"
 description = "Admin options to work with the max length of the name of your files"
 authors = [
     {name = "turulomio",email = "turulomio@yahoo.es"}
