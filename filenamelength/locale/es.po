@@ -1,16 +1,16 @@
-# Spanish translations for PACKAGE package
-# Traducciones al español para el paquete PACKAGE.
-# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# root <turulomio@yahoo.es>, 2015.
+# Spanish translations for filenamelength package
+# Traducciones al español para el paquete filenamelength.
+# Copyright (C) 2025 Mariano Muñoz
+# This file is distributed under the same license as the filenamelength package.
+# turulomio <turulomio@yahoo.es>, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TooManyFiles\n"
+"Project-Id-Version: filenamelength 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 08:44+0200\n"
-"PO-Revision-Date: 2015-03-22 18:51+0100\n"
-"Last-Translator: root <turulomio@yahoo.es>\n"
+"POT-Creation-Date: 2025-12-27 09:28+0100\n"
+"PO-Revision-Date: 2025-12-27 09:30+0100\n"
+"Last-Translator: turulomio <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgid "{} files found {}, whose path length is greater than or equal to {} and i
 msgstr "{} ficheros encontrados {}, cuya longitud de path es mayor o igual que {} y su longitud de nombre de fichero es mayor o igual que {}"
 
 msgid "Lists files with path and filename conditions"
-msgstr ""
+msgstr "Lista ficheros con condiciones de path y nombre de fichero"
 
 msgid "Minimum length for windows is 247"
 msgstr "La mínima longitud para windows es 247"
@@ -43,10 +43,10 @@ msgid "Developed by Mariano Muñoz 2019-{}"
 msgstr "Desarrollado por Mariano Muñoz 2019-{}"
 
 msgid "List files whose path length is greater than or equal to this value"
-msgstr ""
+msgstr "Lista ficheros cuya longitud de path es mayor o igual a este valor"
 
 msgid "List files whose filename length is greater than or equal to this value"
-msgstr ""
+msgstr "Lista ficheros cuya longitud de nombre de fichero es mayor o igual a este valor"
 
 msgid "Different ways to order output"
 msgstr "Diferentes formas de ordenar la salida"
@@ -55,13 +55,16 @@ msgid "New Release:"
 msgstr "Nueva versión:"
 
 msgid "  * Change version and date in __init__.py"
-msgstr ""
+msgstr "  * Cambiar versión y fecha en __init__.py"
+
+msgid "  * Change version in pyproject.toml"
+msgstr "  * Cambiar versión en pyproject.toml"
 
 msgid "  * Make a new tag in github"
-msgstr ""
+msgstr "  * Crear una nueva etiqueta en github"
 
 msgid "  * Create a new gentoo ebuild with the new version"
-msgstr ""
+msgstr "  * Crear un nuevo ebuild de gentoo con la nueva versión"
 
 msgid "  * Upload to portage repository"
-msgstr ""
+msgstr "  * Subir al repositorio portage"
