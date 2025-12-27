@@ -2,3 +2,5 @@
 .eric6project/
 filenameLength.e4p
 filenamelength/__pycache__/
+dist
+doc
