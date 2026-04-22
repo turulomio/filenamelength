@@ -20,7 +20,7 @@ filenamelength='filenamelength.filenamelength:main'
 
 [tool.poetry.group.dev.dependencies]
 poethepoet = ">=0.39.0"
-poetry = ">=2.2.1"
+poetry = ">=2.3.4"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
