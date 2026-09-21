@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10,<4"
 dependencies = [
     "colorama >=0.4.6",
-    "pydicts >=1.1.0"
+    "pydicts (>=1.5.0)"
 ]
 
 [tool.poetry]
@@ -19,8 +19,8 @@ dependencies = [
 filenamelength='filenamelength.filenamelength:main'
 
 [tool.poetry.group.dev.dependencies]
-poethepoet = ">=0.39.0"
-poetry = ">=2.3.4"
+poethepoet = ">=0.48.0"
+poetry = ">=2.5.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
