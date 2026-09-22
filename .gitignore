@@ -5,6 +5,6 @@ filenamelength/__pycache__/
 **/__pycache__/
 
 dist
-doc
 .coverage
 .pytest_cache/
+

@@ -83,11 +83,18 @@ poetry run poe test
 poetry run pytest --cov=filenamelength --cov-report=term-missing
 ```
 
-### 5. Release Checklist
+### 5. Generating Video Demonstrations (VHS)
+```bash
+# Generates demonstration GIF videos using VHS in doc/
+poetry run poe video
+```
+
+### 6. Release Checklist
 To view the release steps:
 ```bash
 poetry run poe release
 ```
+
 
 ---
 

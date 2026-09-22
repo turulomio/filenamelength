@@ -81,6 +81,24 @@ poetry run filenamelength --undo 3
 
 ---
 
+## Demonstration Videos
+
+### 1. Help and Filesystem Limits Reference (`command.gif`)
+Running `filenamelength --help` displays all available CLI options along with the reference table showing maximum filename and full path limits for popular filesystems:
+
+![CLI Help and Filesystem Limits](doc/command.gif)
+
+### 2. Filtering, Renaming, and Undoing (`howto.gif`)
+Demonstrates the complete workflow:
+1. **Filtering & Sorting:** Inspects files whose filename length is at least 30 characters, ordered by filename length (`--minimum_filename_length 30 --order_by FilenameLength`).
+2. **Safe Renaming (`--rename`):** Shortens names exceeding the threshold to fit the desired size without altering directories and with automatic collision avoidance.
+3. **Undoing Changes (`--undo`):** Reverts the rename operation, restoring all original filenames.
+
+![Filtering, Renaming, and Undoing](doc/howto.gif)
+
+---
+
+
 ## User Configuration
 
 Configuration files are located in `~/.config/filenamelength/` (or `$XDG_CONFIG_HOME/filenamelength`):

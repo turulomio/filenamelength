@@ -32,3 +32,5 @@ build-backend = "poetry.core.masonry.api"
 release = { script = "filenamelength.poethepoet:release" }
 translate = { script = "filenamelength.poethepoet:translate" }
 test = "pytest --cov=filenamelength --cov-report=term-missing"
+video = { script = "filenamelength.poethepoet:video" }
+
