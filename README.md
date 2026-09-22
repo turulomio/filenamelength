@@ -4,6 +4,22 @@ A Python command-line utility to inspect, measure, filter, and optimize files ba
 
 ---
 
+## Motivation
+
+Different operating systems and filesystems enforce drastically different constraints on filename and path lengths:
+
+- **Windows & Legacy Systems:** Standard Windows Win32 APIs impose a `MAX_PATH` limit of **260 characters** for the full path. Once drive letters (`C:\`), directory separators, and multi-character file extensions (e.g., `.docx`, `.tar.gz`) are accounted for, the realistic safe filename length drops to **247–252 characters**—or significantly less when files reside inside nested folders.
+- **Linux/Unix vs. Windows Architecture:** On Linux/Unix filesystems (ext4, Btrfs, XFS), individual filenames can reach up to **255 bytes** while the total path can extend up to **4,096 bytes** (`PATH_MAX`). In contrast, Windows historical path handling treats directory paths and filenames within the same tight boundary.
+- **Cross-Platform Headaches:** When transferring files across platforms (such as backing up Linux data to Windows shares, external FAT32/exFAT drives, optical media, or cloud storage), long names or deeply nested paths frequently trigger cryptic `"File name too long"` errors or silent copy failures. Users are often puzzled because a filename looks short, yet the full directory path breaches destination filesystem limits.
+
+`filenamelength` was created to solve this problem:
+1. **Audit:** Quickly discover files and paths that exceed target filesystem constraints.
+2. **Reference:** Consult built-in limits for common Linux, Windows, macOS, Unix, optical, and network filesystems (`filenamelength --help`).
+3. **Remediate:** Automatically rename files to safe, optimized lengths (`--rename`) while preserving file extensions and preventing collisions.
+4. **Safety Net:** Revert any renaming operations seamlessly (`--undo`).
+
+---
+
 ## Features
 
 - **Inspect & Filter:** Scan directory trees and list files exceeding minimum path or filename length thresholds.
@@ -90,7 +106,7 @@ Running `filenamelength --help` displays all available CLI options along with th
 
 ### 2. Filtering, Renaming, and Undoing (`howto.gif`)
 Demonstrates the complete workflow:
-1. **Filtering & Sorting:** Inspects files whose filename length is at least 30 characters, ordered by filename length (`--minimum_filename_length 30 --order_by FilenameLength`).
+1. **Filtering & Sorting:** Inspects files whose filename length is at least 25 characters, ordered by filename length (`--minimum_filename_length 25 --order_by FilenameLength`).
 2. **Safe Renaming (`--rename`):** Shortens names exceeding the threshold to fit the desired size without altering directories and with automatic collision avoidance.
 3. **Undoing Changes (`--undo`):** Reverts the rename operation, restoring all original filenames.
 
