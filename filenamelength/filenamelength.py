@@ -7,6 +7,8 @@ from importlib.resources import files
 from pydicts import lod
 from shutil import rmtree
 from sys import exit
+from tabulate import tabulate
+from filenamelength.filesystems import get_fsinfo_lod
 
 ##Seriously, generally speaking it is 252 characters, but that comes with caveats. In real-world, common usage, the max is 247. Here is why:
 ##1. The maximum Windows filename length to the operating system is 260 characters, however that includes a number of required characters that lower the effective number.
@@ -62,178 +64,20 @@ def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, ord
     print (Style.BRIGHT + _("{} files found {}, whose path length is greater than or equal to {} and its filename length is greater than or equal to {}".format(len(lod_files), suf, minimum_path_length, minimum_filename_length))+Style.RESET_ALL)
                 
 
-def get_fsinfo_lod():
-    return [
-        {
-            _("Filesystem"): "ext4",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Standard Linux filesystem")
-        },
-        {
-            _("Filesystem"): "ext3",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Legacy Linux filesystem")
-        },
-        {
-            _("Filesystem"): "ext2",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Legacy Linux filesystem without journaling")
-        },
-        {
-            _("Filesystem"): "Btrfs",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Modern copy-on-write filesystem for Linux")
-        },
-        {
-            _("Filesystem"): "XFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("High-performance 64-bit journaling filesystem (Linux)")
-        },
-        {
-            _("Filesystem"): "ZFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (POSIX VFS)"),
-            _("Notes / OS"): _("Advanced pool filesystem (FreeBSD, Linux, Solaris)")
-        },
-        {
-            _("Filesystem"): "F2FS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Flash-Friendly File System (Android, Linux)")
-        },
-        {
-            _("Filesystem"): "NTFS",
-            _("Max filename length"): _("255 characters"),
-            _("Max path length"): _("32767 chars (\\\\?\\) / 260 chars (MAX_PATH)"),
-            _("Notes / OS"): _("Windows standard filesystem (Win32 default 260 chars)")
-        },
-        {
-            _("Filesystem"): "FAT32",
-            _("Max filename length"): _("255 characters (LFN) / 8.3 (SFN)"),
-            _("Max path length"): _("260 characters"),
-            _("Notes / OS"): _("Universal compatibility (USB drives, SD cards <= 32GB)")
-        },
-        {
-            _("Filesystem"): "exFAT",
-            _("Max filename length"): _("255 characters (UTF-16)"),
-            _("Max path length"): _("32767 chars (extended) / 260 chars"),
-            _("Notes / OS"): _("Optimized for flash memory & large SD cards (> 32GB)")
-        },
-        {
-            _("Filesystem"): "FAT16",
-            _("Max filename length"): _("255 characters (LFN) / 8.3 (SFN)"),
-            _("Max path length"): _("260 characters"),
-            _("Notes / OS"): _("Legacy DOS / Windows filesystem")
-        },
-        {
-            _("Filesystem"): "FAT12",
-            _("Max filename length"): _("255 characters (LFN) / 8.3 (SFN)"),
-            _("Max path length"): _("260 characters"),
-            _("Notes / OS"): _("Floppy disks and small storage devices")
-        },
-        {
-            _("Filesystem"): "APFS",
-            _("Max filename length"): _("255 characters (UTF-8)"),
-            _("Max path length"): _("1024 characters (POSIX PATH_MAX)"),
-            _("Notes / OS"): _("Apple File System (macOS, iOS, iPadOS)")
-        },
-        {
-            _("Filesystem"): "HFS+",
-            _("Max filename length"): _("255 characters (UTF-16)"),
-            _("Max path length"): _("1024 characters (POSIX PATH_MAX)"),
-            _("Notes / OS"): _("Legacy Apple macOS / Mac OS X filesystem")
-        },
-        {
-            _("Filesystem"): "UFS / UFS2",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("1024 bytes (POSIX PATH_MAX)"),
-            _("Notes / OS"): _("Unix File System (FreeBSD, OpenBSD, NetBSD, Solaris)")
-        },
-        {
-            _("Filesystem"): "JFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Journaled File System (IBM AIX, Linux)")
-        },
-        {
-            _("Filesystem"): "ReiserFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Journaling filesystem (Linux)")
-        },
-        {
-            _("Filesystem"): "ISO 9660",
-            _("Max filename length"): _("255 chars (RockRidge) / 64 (Joliet) / 31 (L2) / 8.3 (L1)"),
-            _("Max path length"): _("255 chars (L1) / 4096 bytes (POSIX)"),
-            _("Notes / OS"): _("CD-ROM optical disc standard format")
-        },
-        {
-            _("Filesystem"): "UDF",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("1023 bytes"),
-            _("Notes / OS"): _("Universal Disk Format (DVD, Blu-ray, optical media)")
-        },
-        {
-            _("Filesystem"): "NFS (v3/v4)",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (POSIX client)"),
-            _("Notes / OS"): _("Network File System (Unix / Linux network share)")
-        },
-        {
-            _("Filesystem"): "SMB / CIFS",
-            _("Max filename length"): _("255 characters"),
-            _("Max path length"): _("32767 chars (Windows) / 4096 bytes (POSIX client)"),
-            _("Notes / OS"): _("Server Message Block (Windows share / Samba)")
-        },
-        {
-            _("Filesystem"): "tmpfs",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (PATH_MAX)"),
-            _("Notes / OS"): _("Memory-backed temporary filesystem (Linux / Unix)")
-        },
-        {
-            _("Filesystem"): "CephFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (POSIX client)"),
-            _("Notes / OS"): _("Distributed network filesystem (Ceph)")
-        },
-        {
-            _("Filesystem"): "GlusterFS",
-            _("Max filename length"): _("255 bytes"),
-            _("Max path length"): _("4096 bytes (POSIX client)"),
-            _("Notes / OS"): _("Scalable distributed network filesystem")
-        },
-    ]
-
-
-def print_fsinfo():
-    fsinfo_lod = get_fsinfo_lod()
-    lod.lod_print(fsinfo_lod)
-
-
 ## filenamelength main script
 ## If arguments is None, launches with sys.argc parameters. Entry point is filenamelength:main
 ## You can call with main(['--pretend']). It's equivalento to os.system('filenamelength --pretend')
 ## @param arguments is an array with parser arguments. For example: ['--max_files_to_store','9']. 
 def main(arguments=None):
-    parser=ArgumentParser(prog='filenamelength', description=_('Lists files with path and filename conditions'), epilog=_("Minimum length for windows is 247")+"\n\n"+_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=RawTextHelpFormatter)
+    epilog_text = _("Minimum length for windows is 247") + "\n\n" + tabulate(get_fsinfo_lod(), headers="keys", tablefmt="psql") + "\n\n" + _("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year))
+    parser=ArgumentParser(prog='filenamelength', description=_('Lists files with path and filename conditions'), epilog=epilog_text, formatter_class=RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
-    parser.add_argument('--fsinfo', help=_("Show maximum filename and path length limits for popular filesystems"), action="store_true")
     parser.add_argument('--minimum_path_length', help=_("List files whose path length is greater than or equal to this value"), action="store", default=0, type=int)
     parser.add_argument('--minimum_filename_length', help=_("List files whose filename length is greater than or equal to this value"), action="store", default=0, type=int)
     parser.add_argument("--order_by", choices=['Path', 'PathLength', 'FilenameLength'], help=_("Different ways to order output"), default="Path")
     args=parser.parse_args(arguments)
 
     init(autoreset=True)
-
-    if args.fsinfo:
-        print_fsinfo()
-        return
 
     lod_files=create_lod_files(getcwd())
     print_lod_files(lod_files, args.minimum_path_length, args.minimum_filename_length, args.order_by)

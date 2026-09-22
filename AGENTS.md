@@ -25,6 +25,7 @@
 ├── filenamelength/
 │   ├── __init__.py          # Version (__version__) and date metadata
 │   ├── filenamelength.py    # Main application logic & CLI entry point
+│   ├── filesystems.py       # Reference table data for popular filesystems
 │   ├── poethepoet.py        # Automation tasks (poe translate, poe release)
 │   └── locale/              # Gettext i18n catalogs (es, .pot, .po, .mo)
 │       ├── es.po
@@ -50,8 +51,8 @@ poetry install
 # Run default scan in current directory
 poetry run filenamelength
 
-# View filesystem limits table
-poetry run filenamelength --fsinfo
+# View help and filesystem limits reference table
+poetry run filenamelength --help
 
 # Filter by minimum path and filename length
 poetry run filenamelength --minimum_path_length 100 --minimum_filename_length 50
@@ -86,18 +87,17 @@ poetry run poe release
 
 | Flag | Description |
 |---|---|
-| `-h`, `--help` | Show help message and exit. |
+| `-h`, `--help` | Show help message with options and the filesystem limits table, and exit. |
 | `--version` | Show program version. |
-| `--fsinfo` | Display maximum filename and full path length limits for popular filesystems. |
 | `--minimum_path_length <int>` | Filter files whose full path length is `>=` specified integer. |
 | `--minimum_filename_length <int>` | Filter files whose filename length is `>=` specified integer. |
 | `--order_by {Path,PathLength,FilenameLength}` | Sort output by specified criterion (default: `Path`). |
 
 ---
 
-## Supported Filesystems in `--fsinfo`
+## Supported Filesystems Reference
 
-The `--fsinfo` command details max filename and path limits for popular filesystems including:
+The `--help` output includes max filename and path limits for popular filesystems:
 - **Linux:** ext4, ext3, ext2, Btrfs, XFS, F2FS, tmpfs
 - **Windows:** NTFS, FAT32, exFAT, FAT16, FAT12
 - **macOS / Apple:** APFS, HFS+
