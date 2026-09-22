@@ -18,6 +18,7 @@ def release():
     print("  * poe translate")
     print("  * mcedit filenamelength/locale/es.po")
     print("  * poe translate")
+    print("  * poe video")
     print("  * git commit -a -m 'filenamelength-{}'".format(__version__))
     print("  * git push")
     print(_("  * Make a new tag in github"))
