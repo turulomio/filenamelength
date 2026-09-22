@@ -21,6 +21,8 @@ filenamelength='filenamelength.filenamelength:main'
 [tool.poetry.group.dev.dependencies]
 poethepoet = ">=0.48.0"
 poetry = ">=2.5.1"
+pytest = "^9.1.1"
+pytest-cov = "^7.1.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -29,3 +31,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poe.tasks]
 release = { script = "filenamelength.poethepoet:release" }
 translate = { script = "filenamelength.poethepoet:translate" }
+test = "pytest --cov=filenamelength --cov-report=term-missing"

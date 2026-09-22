@@ -75,7 +75,15 @@ When explicitly instructed to update translations:
 3. Update translations in `filenamelength/locale/es.po`.
 4. Re-run `poetry run poe translate` to compile `.mo` catalogs.
 
-### 4. Release Checklist
+### 4. Running Tests
+```bash
+# Run pytest with code coverage
+poetry run poe test
+# or directly with pytest
+poetry run pytest --cov=filenamelength --cov-report=term-missing
+```
+
+### 5. Release Checklist
 To view the release steps:
 ```bash
 poetry run poe release
@@ -92,6 +100,8 @@ poetry run poe release
 | `--minimum_path_length <int>` | Filter files whose full path length is `>=` specified integer. |
 | `--minimum_filename_length <int>` | Filter files whose filename length is `>=` specified integer. |
 | `--order_by {Path,PathLength,FilenameLength}` | Sort output by specified criterion (default: `Path`). |
+| `--rename` | Rename files exceeding limits to an optimized name within the desired length. |
+| `--undo [N]` | Undo the last N rename operations (default: 1). |
 
 ---
 
