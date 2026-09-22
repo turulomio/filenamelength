@@ -38,6 +38,15 @@ except:
 
 
 def get_user_config_dir():
+    """
+    Returns the absolute path to the user configuration directory for filenamelength.
+
+    Resolves XDG_CONFIG_HOME if defined, %APPDATA% on Windows, or ~/.config on Unix-like systems.
+    The directory is created if it does not already exist.
+
+    :return: Absolute path to the user configuration directory.
+    :rtype: str
+    """
     if "XDG_CONFIG_HOME" in environ and environ["XDG_CONFIG_HOME"]:
         base_dir = environ["XDG_CONFIG_HOME"]
     elif os_name == "nt":
@@ -50,6 +59,15 @@ def get_user_config_dir():
 
 
 def ensure_user_config():
+    """
+    Ensures that the user configuration directory and required configuration files exist.
+
+    Creates 'config.json' with default settings (such as max_history_entries) and
+    'history.json' (empty list) if they do not exist.
+
+    :return: Absolute path to the user configuration directory.
+    :rtype: str
+    """
     config_dir = get_user_config_dir()
     config_file = path.join(config_dir, "config.json")
     if not path.exists(config_file):
@@ -68,6 +86,14 @@ def ensure_user_config():
 
 
 def get_config():
+    """
+    Loads and returns the user configuration dictionary from 'config.json'.
+
+    Falls back to default configuration values if the file cannot be read or parsed.
+
+    :return: Dictionary containing configuration options.
+    :rtype: dict
+    """
     config_dir = ensure_user_config()
     config_file = path.join(config_dir, "config.json")
     try:
@@ -78,6 +104,12 @@ def get_config():
 
 
 def load_history():
+    """
+    Loads the rename history sessions from 'history.json'.
+
+    :return: List of history session dictionaries, each containing timestamp, cwd, and operations.
+    :rtype: list
+    """
     config_dir = ensure_user_config()
     history_file = path.join(config_dir, "history.json")
     try:
@@ -91,6 +123,13 @@ def load_history():
 
 
 def save_history(history):
+    """
+    Persists the rename history sessions to 'history.json', trimming older entries
+    if the list exceeds 'max_history_entries' defined in configuration.
+
+    :param history: List of history session dictionaries to save.
+    :type history: list
+    """
     config_dir = ensure_user_config()
     history_file = path.join(config_dir, "history.json")
     config = get_config()
@@ -102,7 +141,25 @@ def save_history(history):
         f.write("\n")
 
 
+
 def generate_optimized_filename(filename, target_len, existing_names):
+    """
+    Generates an optimized filename truncated to at most target_len characters
+    while preserving the file extension and resolving collisions.
+
+    If candidate filename collides with any entry in existing_names, increments
+    a numbered suffix (_1, _2, ...) and shortens the stem accordingly to guarantee
+    the total length does not exceed target_len.
+
+    :param filename: Original filename to optimize.
+    :type filename: str
+    :param target_len: Desired maximum length for the filename.
+    :type target_len: int
+    :param existing_names: Set of filenames already present or planned in the directory.
+    :type existing_names: set
+    :return: An optimized filename of length <= target_len that is not in existing_names.
+    :rtype: str
+    """
     if len(filename) <= target_len and filename not in existing_names:
         return filename
 
@@ -136,6 +193,23 @@ def generate_optimized_filename(filename, target_len, existing_names):
 
 
 def rename_files(lod_files, minimum_path_length, minimum_filename_length):
+    """
+    Renames files in lod_files that exceed length limits to optimized names.
+
+    Calculates target filename length based on minimum_filename_length and/or
+    minimum_path_length without modifying directory paths. Avoids overwriting
+    existing files by appending numbering on collision. Records successful
+    operations to user history for undo support.
+
+    :param lod_files: List of file dictionaries (with 'Path', 'Path length', 'Filename length').
+    :type lod_files: list
+    :param minimum_path_length: Target maximum path length threshold (0 if disabled).
+    :type minimum_path_length: int
+    :param minimum_filename_length: Target maximum filename length threshold (0 if disabled).
+    :type minimum_filename_length: int
+    :return: List of performed rename operations, each containing 'original' and 'renamed' paths.
+    :rtype: list
+    """
     operations = []
     assigned_by_dir = {}
 
@@ -221,6 +295,17 @@ def rename_files(lod_files, minimum_path_length, minimum_filename_length):
 
 
 def undo_rename(steps=1):
+    """
+    Undoes the last N rename sessions from user history in reverse order.
+
+    Restores renamed files to their original paths. Checks that original destinations
+    are not overwritten if they were recreated. Updates the user history file.
+
+    :param steps: Number of rename sessions to undo (defaults to 1).
+    :type steps: int
+    :return: Total number of files successfully restored.
+    :rtype: int
+    """
     ensure_user_config()
     history = load_history()
     if not history:
@@ -269,6 +354,15 @@ def undo_rename(steps=1):
 
 
 def create_lod_files(directory):
+    """
+    Recursively scans the given directory and returns a list of dictionaries with file metadata.
+
+    :param directory: Root directory path to scan.
+    :type directory: str
+    :raises Exception: If directory is None.
+    :return: List of dictionaries with 'Path', 'Path length', and 'Filename length'.
+    :rtype: list
+    """
     r=[]
     if directory!=None:
         for currentpath, folders, files in walk(directory):
@@ -285,6 +379,20 @@ def create_lod_files(directory):
 
 
 def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, order_by):
+    """
+    Filters, sorts, and prints the list of file dictionaries as a formatted table.
+
+    :param lod_files: List of file dictionaries to filter and display.
+    :type lod_files: list
+    :param minimum_path_length: Filter threshold for path length (>= value).
+    :type minimum_path_length: int
+    :param minimum_filename_length: Filter threshold for filename length (>= value).
+    :type minimum_filename_length: int
+    :param order_by: Sorting criterion ('Path', 'PathLength', or 'FilenameLength').
+    :type order_by: str
+    :return: Filtered list of file dictionaries.
+    :rtype: list
+    """
     lod_files=lod.lod_filter_dictionaries(lod_files,lambda d, index: d["Filename length"]>=minimum_filename_length and d["Path length"]>=minimum_path_length)
     if order_by=="Path":
         lod_files=lod.lod_order_by(lod_files,"Path")
@@ -305,6 +413,17 @@ def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, ord
 ## You can call with main(['--pretend']). It's equivalento to os.system('filenamelength --pretend')
 ## @param arguments is an array with parser arguments. For example: ['--max_files_to_store','9']. 
 def main(arguments=None):
+    """
+    Main CLI entry point for filenamelength.
+
+    Parses command line arguments, handles listing, renaming, and undo operations.
+
+    :param arguments: Command-line arguments list (defaults to None, reading sys.argv).
+    :type arguments: list or None
+    :return: Exit status code (0 on success, non-zero on error).
+    :rtype: int
+    """
+
     ensure_user_config()
     epilog_buffer = StringIO()
     with redirect_stdout(epilog_buffer):
