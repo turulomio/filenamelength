@@ -10,10 +10,18 @@ Different operating systems and filesystems enforce drastically different constr
 
 - **Windows & Legacy Systems:** Standard Windows Win32 APIs impose a `MAX_PATH` limit of **260 characters** for the full path. Once drive letters (`C:\`), directory separators, and multi-character file extensions (e.g., `.docx`, `.tar.gz`) are accounted for, the realistic safe filename length drops to **247–252 characters**—or significantly less when files reside inside nested folders.
 - **Linux/Unix vs. Windows Architecture:** On Linux/Unix filesystems (ext4, Btrfs, XFS), individual filenames can reach up to **255 bytes** while the total path can extend up to **4,096 bytes** (`PATH_MAX`). In contrast, Windows historical path handling treats directory paths and filenames within the same tight boundary.
-- **Cross-Platform Headaches:** When transferring files across platforms (such as backing up Linux data to Windows shares, external FAT32/exFAT drives, optical media, or cloud storage), long names or deeply nested paths frequently trigger cryptic `"File name too long"` errors or silent copy failures. Users are often puzzled because a filename looks short, yet the full directory path breaches destination filesystem limits.
+- **Cross-Platform Headaches:** When transferring files across platforms (such as copying Linux data to Windows shares, external FAT32/exFAT drives, optical media, or cloud storage), long names or deeply nested paths frequently trigger cryptic `"File name too long"` errors or silent copy failures. Users are often puzzled because a filename looks short, yet the full directory path breaches destination filesystem limits.
 
-`filenamelength` was created to solve this problem:
-1. **Audit:** Quickly discover files and paths that exceed target filesystem constraints.
+### Backup Warnings & Failures in Heterogeneous Environments
+
+Heterogeneous IT environments—mixing Linux servers, macOS workstations, Windows desktops, NAS appliances, and cloud repositories—are particularly vulnerable to subtle and dangerous backup issues:
+
+- **Warning Floods & Silent Skips:** Backup and synchronization tools (such as `rsync`, Robocopy, Rclone, Borg, Restic, or enterprise backup agents) often emit warnings or fail when encountering path lengths exceeding destination filesystem limits (`errno 36 ENAMETOOLONG`, Win32 error 206 `ERROR_FILENAME_EXCED_RANGE`). In large automated backups, these warnings are frequently buried deep in megabytes of logs, creating a false sense of security while critical files are skipped and never actually backed up.
+- **The Disaster Recovery Trap (Restore Failures):** A backup created on a Linux or Unix system (where 4,096-byte paths are permitted) may succeed when written directly into an archive file. However, catastrophic failure occurs during **restoration** if the target is a Windows host, an NTFS/FAT32 external drive, or an SMB/CIFS network share. Finding out that mission-critical data cannot be unpacked or restored during a disaster recovery emergency is one of the most frustrating scenarios in system administration.
+- **Removable & Optical Media Limitations:** Archiving onto optical media (e.g. ISO 9660 Joliet with its 64-character limit, or UDF with 1,023 bytes) or USB thumb drives formatted with FAT32 exposes strict constraints that immediately break deep directory trees.
+
+`filenamelength` was created to solve these challenges:
+1. **Audit:** Quickly discover files and paths that exceed target filesystem constraints before running backup or migration jobs.
 2. **Reference:** Consult built-in limits for common Linux, Windows, macOS, Unix, optical, and network filesystems (`filenamelength --help`).
 3. **Remediate:** Automatically rename files to safe, optimized lengths (`--rename`) while preserving file extensions and preventing collisions.
 4. **Safety Net:** Revert any renaming operations seamlessly (`--undo`).
