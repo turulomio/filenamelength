@@ -7,7 +7,8 @@ from importlib.resources import files
 from pydicts import lod
 from shutil import rmtree
 from sys import exit
-from tabulate import tabulate
+from io import StringIO
+from contextlib import redirect_stdout
 from filenamelength.filesystems import get_fsinfo_lod
 
 ##Seriously, generally speaking it is 252 characters, but that comes with caveats. In real-world, common usage, the max is 247. Here is why:
@@ -69,7 +70,16 @@ def print_lod_files(lod_files, minimum_path_length, minimum_filename_length, ord
 ## You can call with main(['--pretend']). It's equivalento to os.system('filenamelength --pretend')
 ## @param arguments is an array with parser arguments. For example: ['--max_files_to_store','9']. 
 def main(arguments=None):
-    epilog_text = tabulate(get_fsinfo_lod(), headers="keys", tablefmt="psql") + "\n\n" + _("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year))
+    epilog_buffer = StringIO()
+    with redirect_stdout(epilog_buffer):
+        lod.lod_print(get_fsinfo_lod())
+    epilog_text = (
+        _("The table below shows the maximum filename and path length limits for common filesystems:")
+        + "\n\n"
+        + epilog_buffer.getvalue()
+        + "\n"
+        + _("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year))
+    )
     parser=ArgumentParser(prog='filenamelength', description=_('Lists files with path and filename conditions'), epilog=epilog_text, formatter_class=RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--minimum_path_length', help=_("List files whose path length is greater than or equal to this value"), action="store", default=0, type=int)
