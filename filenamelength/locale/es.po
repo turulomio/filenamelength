@@ -2,14 +2,14 @@
 # Traducciones al español para el paquete filenamelength.
 # Copyright (C) 2025 Mariano Muñoz
 # This file is distributed under the same license as the filenamelength package.
-# turulomio <turulomio@yahoo.es>, 2025.
+# turulomio <turulomio@yahoo.es>, 2025-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: filenamelength 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-27 09:28+0100\n"
-"PO-Revision-Date: 2025-12-27 09:30+0100\n"
+"POT-Creation-Date: 2026-09-22 08:38+0200\n"
+"PO-Revision-Date: 2026-09-22 08:42+0200\n"
 "Last-Translator: turulomio <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -17,6 +17,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Cannot rename '{}': directory path length ({}) already exceeds or equals desired path length ({})."
+msgstr "No se puede renombrar '{}': la longitud del path del directorio ({}) ya supera o iguala la longitud deseada ({})."
+
+msgid "Error renaming '{}' to '{}': {}"
+msgstr "Error al renombrar '{}' a '{}': {}"
+
+msgid "Original path"
+msgstr "Path original"
+
+msgid "New path"
+msgstr "Nuevo path"
+
+msgid "New filename length"
+msgstr "Nueva long. de nombre"
+
+msgid "New path length"
+msgstr "Nueva long. de path"
+
+msgid "Renamed files:"
+msgstr "Ficheros renombrados:"
+
+msgid "{} files renamed."
+msgstr "{} ficheros renombrados."
+
+msgid "No files needed to be renamed."
+msgstr "Ningún fichero necesita ser renombrado."
+
+msgid "No rename operations to undo."
+msgstr "No hay operaciones de renombre que deshacer."
+
+msgid "Cannot undo: '{}' not found."
+msgstr "No se puede deshacer: '{}' no encontrado."
+
+msgid "Cannot undo: '{}' already exists."
+msgstr "No se puede deshacer: '{}' ya existe."
+
+msgid "Current path"
+msgstr "Path actual"
+
+msgid "Restored path"
+msgstr "Path restaurado"
+
+msgid "Error restoring '{}' to '{}': {}"
+msgstr "Error al restaurar '{}' a '{}': {}"
+
+msgid "Undone rename operations (session {}):"
+msgstr "Operaciones de renombre deshechas (sesión {}):"
+
+msgid "{} total files restored across {} session(s)."
+msgstr "{} ficheros restaurados en total a lo largo de {} sesión(es)."
 
 msgid "Directory error"
 msgstr "Error de directory"
@@ -33,14 +84,14 @@ msgstr "ordenado por la longitud del nombre del fichero"
 msgid "{} files found {}, whose path length is greater than or equal to {} and its filename length is greater than or equal to {}"
 msgstr "{} ficheros encontrados {}, cuya longitud de path es mayor o igual que {} y su longitud de nombre de fichero es mayor o igual que {}"
 
-msgid "Lists files with path and filename conditions"
-msgstr "Lista ficheros con condiciones de path y nombre de fichero"
-
-msgid "Minimum length for windows is 247"
-msgstr "La mínima longitud para windows es 247"
+msgid "The table below shows the maximum filename and path length limits for common filesystems:"
+msgstr "La siguiente tabla muestra los límites máximos de longitud de nombre de fichero y path para sistemas de ficheros comunes:"
 
 msgid "Developed by Mariano Muñoz 2019-{}"
 msgstr "Desarrollado por Mariano Muñoz 2019-{}"
+
+msgid "Lists files with path and filename conditions"
+msgstr "Lista ficheros con condiciones de path y nombre de fichero"
 
 msgid "List files whose path length is greater than or equal to this value"
 msgstr "Lista ficheros cuya longitud de path es mayor o igual a este valor"
@@ -50,6 +101,156 @@ msgstr "Lista ficheros cuya longitud de nombre de fichero es mayor o igual a est
 
 msgid "Different ways to order output"
 msgstr "Diferentes formas de ordenar la salida"
+
+msgid "Rename files exceeding limits to an optimized name within the desired length"
+msgstr "Renombra los ficheros que superan los límites a un nombre optimizado dentro de la longitud deseada"
+
+msgid "Undo the last N rename operations (default: 1)"
+msgstr "Deshace las últimas N operaciones de renombre (por defecto: 1)"
+
+msgid "Error: Cannot use --rename and --undo together."
+msgstr "Error: No se pueden usar --rename y --undo a la vez."
+
+msgid "Error: --undo value must be greater than 0."
+msgstr "Error: el valor de --undo debe ser mayor que 0."
+
+msgid "Error: --rename requires --minimum_path_length or --minimum_filename_length to be set."
+msgstr "Error: --rename requiere especificar --minimum_path_length o --minimum_filename_length."
+
+msgid "Filesystem"
+msgstr "Sistema de ficheros"
+
+msgid "Max filename length"
+msgstr "Longitud máx. nombre"
+
+msgid "255 bytes"
+msgstr "255 bytes"
+
+msgid "Max path length"
+msgstr "Longitud máx. path"
+
+msgid "4096 bytes (PATH_MAX)"
+msgstr "4096 bytes (PATH_MAX)"
+
+msgid "Notes / OS"
+msgstr "Notas / SO"
+
+msgid "Standard Linux filesystem"
+msgstr "Sistema de ficheros estándar de Linux"
+
+msgid "Legacy Linux filesystem"
+msgstr "Sistema de ficheros heredado de Linux"
+
+msgid "Legacy Linux filesystem without journaling"
+msgstr "Sistema de ficheros heredado de Linux sin journaling"
+
+msgid "Modern copy-on-write filesystem for Linux"
+msgstr "Sistema de ficheros copy-on-write moderno para Linux"
+
+msgid "High-performance 64-bit journaling filesystem (Linux)"
+msgstr "Sistema de ficheros journaling de 64 bits de alto rendimiento (Linux)"
+
+msgid "4096 bytes (POSIX VFS)"
+msgstr "4096 bytes (POSIX VFS)"
+
+msgid "Advanced pool filesystem (FreeBSD, Linux, Solaris)"
+msgstr "Sistema de ficheros pool avanzado (FreeBSD, Linux, Solaris)"
+
+msgid "Flash-Friendly File System (Android, Linux)"
+msgstr "Sistema de ficheros amigable con flash (Android, Linux)"
+
+msgid "255 characters"
+msgstr "255 caracteres"
+
+msgid "32767 chars (\\\\?\\) / 260 chars (MAX_PATH)"
+msgstr "32767 caracteres (\\\\?\\) / 260 caracteres (MAX_PATH)"
+
+msgid "Windows standard filesystem (Win32 default 260 chars)"
+msgstr "Sistema de ficheros estándar de Windows (Win32 por defecto 260 caracteres)"
+
+msgid "255 characters (LFN) / 8.3 (SFN)"
+msgstr "255 caracteres (LFN) / 8.3 (SFN)"
+
+msgid "260 characters"
+msgstr "260 caracteres"
+
+msgid "Universal compatibility (USB drives, SD cards <= 32GB)"
+msgstr "Compatibilidad universal (unidades USB, tarjetas SD <= 32GB)"
+
+msgid "255 characters (UTF-16)"
+msgstr "255 caracteres (UTF-16)"
+
+msgid "32767 chars (extended) / 260 chars"
+msgstr "32767 caracteres (extendido) / 260 caracteres"
+
+msgid "Optimized for flash memory & large SD cards (> 32GB)"
+msgstr "Optimizado para memoria flash y tarjetas SD grandes (> 32GB)"
+
+msgid "Legacy DOS / Windows filesystem"
+msgstr "Sistema de ficheros heredado de DOS / Windows"
+
+msgid "Floppy disks and small storage devices"
+msgstr "Disquetes y pequeños dispositivos de almacenamiento"
+
+msgid "255 characters (UTF-8)"
+msgstr "255 caracteres (UTF-8)"
+
+msgid "1024 characters (POSIX PATH_MAX)"
+msgstr "1024 caracteres (POSIX PATH_MAX)"
+
+msgid "Apple File System (macOS, iOS, iPadOS)"
+msgstr "Apple File System (macOS, iOS, iPadOS)"
+
+msgid "Legacy Apple macOS / Mac OS X filesystem"
+msgstr "Sistema de ficheros heredado de Apple macOS / Mac OS X"
+
+msgid "1024 bytes (POSIX PATH_MAX)"
+msgstr "1024 bytes (POSIX PATH_MAX)"
+
+msgid "Unix File System (FreeBSD, OpenBSD, NetBSD, Solaris)"
+msgstr "Unix File System (FreeBSD, OpenBSD, NetBSD, Solaris)"
+
+msgid "Journaled File System (IBM AIX, Linux)"
+msgstr "Journaled File System (IBM AIX, Linux)"
+
+msgid "Journaling filesystem (Linux)"
+msgstr "Sistema de ficheros journaling (Linux)"
+
+msgid "255 chars (RockRidge) / 64 (Joliet) / 31 (L2) / 8.3 (L1)"
+msgstr "255 caracteres (RockRidge) / 64 (Joliet) / 31 (L2) / 8.3 (L1)"
+
+msgid "255 chars (L1) / 4096 bytes (POSIX)"
+msgstr "255 caracteres (L1) / 4096 bytes (POSIX)"
+
+msgid "CD-ROM optical disc standard format"
+msgstr "Formato estándar de disco óptico CD-ROM"
+
+msgid "1023 bytes"
+msgstr "1023 bytes"
+
+msgid "Universal Disk Format (DVD, Blu-ray, optical media)"
+msgstr "Universal Disk Format (DVD, Blu-ray, medios ópticos)"
+
+msgid "4096 bytes (POSIX client)"
+msgstr "4096 bytes (cliente POSIX)"
+
+msgid "Network File System (Unix / Linux network share)"
+msgstr "Network File System (recurso de red Unix / Linux)"
+
+msgid "32767 chars (Windows) / 4096 bytes (POSIX client)"
+msgstr "32767 caracteres (Windows) / 4096 bytes (cliente POSIX)"
+
+msgid "Server Message Block (Windows share / Samba)"
+msgstr "Server Message Block (recurso compartido Windows / Samba)"
+
+msgid "Memory-backed temporary filesystem (Linux / Unix)"
+msgstr "Sistema de ficheros temporal en memoria (Linux / Unix)"
+
+msgid "Distributed network filesystem (Ceph)"
+msgstr "Sistema de ficheros en red distribuido (Ceph)"
+
+msgid "Scalable distributed network filesystem"
+msgstr "Sistema de ficheros en red distribuido escalable"
 
 msgid "New Release:"
 msgstr "Nueva versión:"
@@ -68,3 +269,9 @@ msgstr "  * Crear un nuevo ebuild de gentoo con la nueva versión"
 
 msgid "  * Upload to portage repository"
 msgstr "  * Subir al repositorio portage"
+
+msgid "vhs tool is needed. Look at https://github.com/charmbracelet/vhs"
+msgstr "Se necesita la herramienta vhs. Visita https://github.com/charmbracelet/vhs"
+
+msgid "An error occurred during video generation."
+msgstr "Ocurrió un error durante la generación del vídeo."

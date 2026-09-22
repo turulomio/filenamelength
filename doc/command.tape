@@ -1,12 +1,19 @@
 Output command.gif
 
-Set FontSize 14
-Set Width 1200
-Set Height 700
+Set FontSize 10
+Set Width 1600
+Set Height 900
 Set Theme "Catppuccin Mocha"
-Set Padding 20
+Set Padding 15
+
+Env LC_ALL "C.UTF-8"
+Env LANG "C.UTF-8"
+Env LANGUAGE "en_US:en"
+
 
 Type "filenamelength --help"
 Sleep 500ms
 Enter
-Sleep 5s
+Sleep 20s
+
+

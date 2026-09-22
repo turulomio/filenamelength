@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-27 09:31+0100\n"
+"POT-Creation-Date: 2026-09-22 08:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "Cannot rename '{}': directory path length ({}) already exceeds or equals desired path length ({})."
+msgstr ""
+
+msgid "Error renaming '{}' to '{}': {}"
+msgstr ""
+
+msgid "Original path"
+msgstr ""
+
+msgid "New path"
+msgstr ""
+
+msgid "New filename length"
+msgstr ""
+
+msgid "New path length"
+msgstr ""
+
+msgid "Renamed files:"
+msgstr ""
+
+msgid "{} files renamed."
+msgstr ""
+
+msgid "No files needed to be renamed."
+msgstr ""
+
+msgid "No rename operations to undo."
+msgstr ""
+
+msgid "Cannot undo: '{}' not found."
+msgstr ""
+
+msgid "Cannot undo: '{}' already exists."
+msgstr ""
+
+msgid "Current path"
+msgstr ""
+
+msgid "Restored path"
+msgstr ""
+
+msgid "Error restoring '{}' to '{}': {}"
+msgstr ""
+
+msgid "Undone rename operations (session {}):"
+msgstr ""
+
+msgid "{} total files restored across {} session(s)."
+msgstr ""
 
 msgid "Directory error"
 msgstr ""
@@ -32,13 +83,13 @@ msgstr ""
 msgid "{} files found {}, whose path length is greater than or equal to {} and its filename length is greater than or equal to {}"
 msgstr ""
 
-msgid "Lists files with path and filename conditions"
-msgstr ""
-
-msgid "Minimum length for windows is 247"
+msgid "The table below shows the maximum filename and path length limits for common filesystems:"
 msgstr ""
 
 msgid "Developed by Mariano Muñoz 2019-{}"
+msgstr ""
+
+msgid "Lists files with path and filename conditions"
 msgstr ""
 
 msgid "List files whose path length is greater than or equal to this value"
@@ -48,6 +99,156 @@ msgid "List files whose filename length is greater than or equal to this value"
 msgstr ""
 
 msgid "Different ways to order output"
+msgstr ""
+
+msgid "Rename files exceeding limits to an optimized name within the desired length"
+msgstr ""
+
+msgid "Undo the last N rename operations (default: 1)"
+msgstr ""
+
+msgid "Error: Cannot use --rename and --undo together."
+msgstr ""
+
+msgid "Error: --undo value must be greater than 0."
+msgstr ""
+
+msgid "Error: --rename requires --minimum_path_length or --minimum_filename_length to be set."
+msgstr ""
+
+msgid "Filesystem"
+msgstr ""
+
+msgid "Max filename length"
+msgstr ""
+
+msgid "255 bytes"
+msgstr ""
+
+msgid "Max path length"
+msgstr ""
+
+msgid "4096 bytes (PATH_MAX)"
+msgstr ""
+
+msgid "Notes / OS"
+msgstr ""
+
+msgid "Standard Linux filesystem"
+msgstr ""
+
+msgid "Legacy Linux filesystem"
+msgstr ""
+
+msgid "Legacy Linux filesystem without journaling"
+msgstr ""
+
+msgid "Modern copy-on-write filesystem for Linux"
+msgstr ""
+
+msgid "High-performance 64-bit journaling filesystem (Linux)"
+msgstr ""
+
+msgid "4096 bytes (POSIX VFS)"
+msgstr ""
+
+msgid "Advanced pool filesystem (FreeBSD, Linux, Solaris)"
+msgstr ""
+
+msgid "Flash-Friendly File System (Android, Linux)"
+msgstr ""
+
+msgid "255 characters"
+msgstr ""
+
+msgid "32767 chars (\\\\?\\) / 260 chars (MAX_PATH)"
+msgstr ""
+
+msgid "Windows standard filesystem (Win32 default 260 chars)"
+msgstr ""
+
+msgid "255 characters (LFN) / 8.3 (SFN)"
+msgstr ""
+
+msgid "260 characters"
+msgstr ""
+
+msgid "Universal compatibility (USB drives, SD cards <= 32GB)"
+msgstr ""
+
+msgid "255 characters (UTF-16)"
+msgstr ""
+
+msgid "32767 chars (extended) / 260 chars"
+msgstr ""
+
+msgid "Optimized for flash memory & large SD cards (> 32GB)"
+msgstr ""
+
+msgid "Legacy DOS / Windows filesystem"
+msgstr ""
+
+msgid "Floppy disks and small storage devices"
+msgstr ""
+
+msgid "255 characters (UTF-8)"
+msgstr ""
+
+msgid "1024 characters (POSIX PATH_MAX)"
+msgstr ""
+
+msgid "Apple File System (macOS, iOS, iPadOS)"
+msgstr ""
+
+msgid "Legacy Apple macOS / Mac OS X filesystem"
+msgstr ""
+
+msgid "1024 bytes (POSIX PATH_MAX)"
+msgstr ""
+
+msgid "Unix File System (FreeBSD, OpenBSD, NetBSD, Solaris)"
+msgstr ""
+
+msgid "Journaled File System (IBM AIX, Linux)"
+msgstr ""
+
+msgid "Journaling filesystem (Linux)"
+msgstr ""
+
+msgid "255 chars (RockRidge) / 64 (Joliet) / 31 (L2) / 8.3 (L1)"
+msgstr ""
+
+msgid "255 chars (L1) / 4096 bytes (POSIX)"
+msgstr ""
+
+msgid "CD-ROM optical disc standard format"
+msgstr ""
+
+msgid "1023 bytes"
+msgstr ""
+
+msgid "Universal Disk Format (DVD, Blu-ray, optical media)"
+msgstr ""
+
+msgid "4096 bytes (POSIX client)"
+msgstr ""
+
+msgid "Network File System (Unix / Linux network share)"
+msgstr ""
+
+msgid "32767 chars (Windows) / 4096 bytes (POSIX client)"
+msgstr ""
+
+msgid "Server Message Block (Windows share / Samba)"
+msgstr ""
+
+msgid "Memory-backed temporary filesystem (Linux / Unix)"
+msgstr ""
+
+msgid "Distributed network filesystem (Ceph)"
+msgstr ""
+
+msgid "Scalable distributed network filesystem"
 msgstr ""
 
 msgid "New Release:"
@@ -66,4 +267,10 @@ msgid "  * Create a new gentoo ebuild with the new version"
 msgstr ""
 
 msgid "  * Upload to portage repository"
+msgstr ""
+
+msgid "vhs tool is needed. Look at https://github.com/charmbracelet/vhs"
+msgstr ""
+
+msgid "An error occurred during video generation."
 msgstr ""

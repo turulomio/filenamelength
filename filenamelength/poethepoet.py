@@ -1,7 +1,8 @@
 from datetime import date
 from filenamelength import __version__
 from gettext import install, translation, gettext
-from os import system, chdir, makedirs, path, environ
+from multiprocessing import Process
+from os import system, chdir, makedirs, path, environ, getcwd
 from shutil import which, move, rmtree
 from sys import exit, executable
 
@@ -35,51 +36,81 @@ def translate():
 def create_examples():
     """Create sample files and directories for VHS recordings."""
     remove_examples()
-    makedirs("filenamelength_examples/files/subfolder/deep/path", exist_ok=True)
+    makedirs("demo/sub", exist_ok=True)
 
-    with open("filenamelength_examples/files/short.txt", "w") as f:
-        f.write("short file content\n")
+    with open("demo/short.txt", "w") as f:
+        f.write("short\n")
 
-    with open("filenamelength_examples/files/project_financial_report_2026.pdf", "w") as f:
-        f.write("pdf content\n")
+    with open("demo/project_report.pdf", "w") as f:
+        f.write("pdf\n")
 
-    with open("filenamelength_examples/files/very_long_descriptive_document_name_for_backup.docx", "w") as f:
-        f.write("docx content\n")
+    with open("demo/financial_audit_report.docx", "w") as f:
+        f.write("docx\n")
 
-    with open("filenamelength_examples/files/extraordinarily_long_archive_file_name_exceeding_standard_limits.tar.gz", "w") as f:
-        f.write("archive content\n")
+    with open("demo/archive_records_backup.tar.gz", "w") as f:
+        f.write("archive\n")
 
-    with open("filenamelength_examples/files/subfolder/deep/path/nested_file_with_a_long_full_path_specification.dat", "w") as f:
-        f.write("dat content\n")
+    with open("demo/sub/longer_path_sample_file.dat", "w") as f:
+        f.write("dat\n")
 
 
 def remove_examples():
     """Remove sample files and directories used for VHS recordings."""
-    if path.exists("filenamelength_examples"):
-        rmtree("filenamelength_examples")
+    if path.exists("demo"):
+        rmtree("demo")
+
+
+def generate_command_video(vhs_cmd, root_dir):
+    """Generate command.gif using VHS in doc/."""
+    doc_dir = path.join(root_dir, "doc")
+    system(f"cd '{doc_dir}' && LC_ALL=C.UTF-8 LANG=C.UTF-8 LANGUAGE=en_US:en {vhs_cmd} command.tape")
+
+
+def generate_howto_video(vhs_cmd, root_dir):
+    """Generate howto.gif using VHS in demo/."""
+    files_dir = path.join(root_dir, "demo")
+    doc_dir = path.join(root_dir, "doc")
+    tape_path = path.join(doc_dir, "howto.tape")
+    system(f"cd '{files_dir}' && LC_ALL=C.UTF-8 LANG=C.UTF-8 LANGUAGE=en_US:en {vhs_cmd} '{tape_path}'")
+    source_gif = path.join(files_dir, "howto.gif")
+    dest_gif = path.join(doc_dir, "howto.gif")
+    if path.exists(source_gif):
+        move(source_gif, dest_gif)
 
 
 def video():
-    """Generate demonstration video recordings and GIFs using VHS."""
+    """Generate demonstration video recordings and GIFs in parallel using multiprocessing and VHS."""
     # Comprobaciones
     vhs = which("vhs")
     if vhs is None:
         print(_("vhs tool is needed. Look at https://github.com/charmbracelet/vhs"))
         exit(1)
 
+    root_dir = path.abspath(getcwd())
+
     # Ensure virtualenv bin is in PATH so VHS subshell can run filenamelength
     venv_bin = path.dirname(executable)
     environ["PATH"] = f"{venv_bin}:{environ.get('PATH', '')}"
+    environ["LC_ALL"] = "C.UTF-8"
+    environ["LANG"] = "C.UTF-8"
+    environ["LANGUAGE"] = "en_US:en"
 
     makedirs("doc", exist_ok=True)
 
-    chdir("doc")
-    system(f"{vhs} command.tape")
-    chdir("..")
-
     create_examples()
-    chdir("filenamelength_examples/files")
-    system(f"{vhs} ../../doc/howto.tape")
-    move("howto.gif", "../../doc/howto.gif")
-    chdir("../..")
+
+    # Launch both video generation processes in parallel
+    p1 = Process(target=generate_command_video, args=(vhs, root_dir))
+    p2 = Process(target=generate_howto_video, args=(vhs, root_dir))
+
+    p1.start()
+    p2.start()
+
+    p1.join()
+    p2.join()
+
     remove_examples()
+
+    if p1.exitcode != 0 or p2.exitcode != 0:
+        print(_("An error occurred during video generation."))
+        exit(1)

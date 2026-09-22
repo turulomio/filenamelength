@@ -1,17 +1,22 @@
 Output howto.gif
 
-Set FontSize 14
-Set Width 1200
-Set Height 700
+Set FontSize 10
+Set Width 1600
+Set Height 850
 Set Theme "Catppuccin Mocha"
-Set Padding 20
+Set Padding 15
 
-Type "filenamelength --minimum_filename_length 30 --order_by FilenameLength"
+Env LC_ALL "C.UTF-8"
+Env LANG "C.UTF-8"
+Env LANGUAGE "en_US:en"
+
+
+Type "filenamelength --minimum_filename_length 25 --order_by FilenameLength"
 Sleep 500ms
 Enter
 Sleep 4s
 
-Type "filenamelength --minimum_filename_length 30 --rename"
+Type "filenamelength --minimum_filename_length 25 --rename"
 Sleep 500ms
 Enter
 Sleep 4s
@@ -19,5 +24,7 @@ Sleep 4s
 Type "filenamelength --undo"
 Sleep 500ms
 Enter
-Sleep 4s
+Sleep 20s
+
+
 

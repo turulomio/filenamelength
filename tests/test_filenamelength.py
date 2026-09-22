@@ -15,6 +15,7 @@ from filenamelength.filenamelength import (
     create_lod_files,
     print_lod_files,
     main,
+    _,
 )
 from filenamelength.filesystems import get_fsinfo_lod
 
@@ -260,7 +261,7 @@ class TestRenameAndUndo:
         assert ops == []
         assert f.exists()
         captured = capsys.readouterr()
-        assert "directory path length" in captured.out
+        assert _("Cannot rename '{}': directory path length ({}) already exceeds or equals desired path length ({}).").format(str(f), len(str(sub)) + len(os.sep), 10) in captured.out
 
     def test_undo_multiple_sessions(self, tmp_path, temp_config_dir):
         f1 = tmp_path / "session1_very_long_file.txt"
@@ -283,7 +284,7 @@ class TestRenameAndUndo:
         undone = undo_rename(1)
         assert undone == 0
         captured = capsys.readouterr()
-        assert "No rename operations to undo" in captured.out
+        assert _("No rename operations to undo.") in captured.out
 
     def test_undo_missing_file(self, tmp_path, temp_config_dir, capsys):
         f = tmp_path / "long_filename_delete_after_rename.txt"
@@ -294,7 +295,7 @@ class TestRenameAndUndo:
         os.remove(ops[0]["renamed"])
         undo_rename(1)
         captured = capsys.readouterr()
-        assert "not found" in captured.out
+        assert _("Cannot undo: '{}' not found.").format(ops[0]["renamed"]) in captured.out
 
     def test_undo_destination_already_exists(self, tmp_path, temp_config_dir, capsys):
         f = tmp_path / "long_filename_recreated_after_rename.txt"
@@ -306,7 +307,7 @@ class TestRenameAndUndo:
         undone = undo_rename(1)
         assert undone == 0
         captured = capsys.readouterr()
-        assert "already exists" in captured.out
+        assert _("Cannot undo: '{}' already exists.").format(str(f)) in captured.out
 
     def test_rename_no_files_need_rename(self, tmp_path, temp_config_dir, capsys):
         f = tmp_path / "short.txt"
@@ -315,7 +316,7 @@ class TestRenameAndUndo:
         ops = rename_files(lod, 0, 20)
         assert ops == []
         captured = capsys.readouterr()
-        assert "No files needed to be renamed" in captured.out
+        assert _("No files needed to be renamed.") in captured.out
 
     def test_undo_negative_steps(self, temp_config_dir):
         # steps <= 0 defaults to 1
@@ -352,19 +353,19 @@ class TestMainCLI:
         code = main(["--rename"])
         assert code == 1
         captured = capsys.readouterr()
-        assert "requires --minimum_path_length or --minimum_filename_length" in captured.out
+        assert _("Error: --rename requires --minimum_path_length or --minimum_filename_length to be set.") in captured.out
 
     def test_main_validation_rename_and_undo_together(self, capsys):
         code = main(["--minimum_filename_length", "10", "--rename", "--undo"])
         assert code == 1
         captured = capsys.readouterr()
-        assert "Cannot use --rename and --undo together" in captured.out
+        assert _("Error: Cannot use --rename and --undo together.") in captured.out
 
     def test_main_validation_undo_non_positive(self, capsys):
         code = main(["--undo", "0"])
         assert code == 1
         captured = capsys.readouterr()
-        assert "--undo value must be greater than 0" in captured.out
+        assert _("Error: --undo value must be greater than 0.") in captured.out
 
     def test_main_full_rename_and_undo_flow(self, tmp_path, temp_config_dir, monkeypatch):
         test_file = tmp_path / "a_very_long_filename_for_main_test.txt"
@@ -386,5 +387,5 @@ class TestFilesystems:
     def test_fsinfo_lod_contents(self):
         fs = get_fsinfo_lod()
         assert len(fs) > 0
-        ext4_entry = next(item for item in fs if item.get("Filesystem") == "ext4")
-        assert "255" in ext4_entry["Max filename length"]
+        ext4_entry = next(item for item in fs if item.get(_("Filesystem")) == "ext4")
+        assert "255" in ext4_entry[_("Max filename length")]
